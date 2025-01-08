@@ -26,7 +26,6 @@ const TShirtDesigner = () => {
     let ctx = canvas.getContext("2d");
     let tShirt = tShirtRef.current;
 
-    // Use getBoundingClientRect for precise dimensions
     let tShirtRect = tShirt.getBoundingClientRect();
     canvas.width = tShirtRect.width;
     canvas.height = tShirtRect.height;
@@ -42,7 +41,6 @@ const TShirtDesigner = () => {
         let logoElement = document.getElementById("logo");
         let logoRect = logoElement.getBoundingClientRect();
 
-        // Calculate position relative to the t-shirt container
         let x = logoRect.left - tShirtRect.left;
         let y = logoRect.top - tShirtRect.top;
 
@@ -50,6 +48,7 @@ const TShirtDesigner = () => {
 
         let finalImg = canvas.toDataURL("image/png");
         setFinalImage(finalImg);
+        console.log(finalImg);
       };
     };
   };
