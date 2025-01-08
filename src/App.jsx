@@ -26,8 +26,10 @@ const TShirtDesigner = () => {
     let ctx = canvas.getContext("2d");
     let tShirt = tShirtRef.current;
 
-    canvas.width = tShirt.offsetWidth;
-    canvas.height = tShirt.offsetHeight;
+    // Use getBoundingClientRect for precise dimensions
+    let tShirtRect = tShirt.getBoundingClientRect();
+    canvas.width = tShirtRect.width;
+    canvas.height = tShirtRect.height;
 
     let tShirtImage = new Image();
     tShirtImage.src = "/tshirt.png";
@@ -38,11 +40,11 @@ const TShirtDesigner = () => {
       logoImage.src = logo;
       logoImage.onload = () => {
         let logoElement = document.getElementById("logo");
-        let rect = logoElement.getBoundingClientRect();
-        let tShirtRect = tShirt.getBoundingClientRect();
+        let logoRect = logoElement.getBoundingClientRect();
 
-        let x = rect.left - tShirtRect.left;
-        let y = rect.top - tShirtRect.top;
+        // Calculate position relative to the t-shirt container
+        let x = logoRect.left - tShirtRect.left;
+        let y = logoRect.top - tShirtRect.top;
 
         ctx.drawImage(logoImage, x, y, logoSize.width, logoSize.height);
 
@@ -132,7 +134,7 @@ const TShirtDesigner = () => {
           <img
             src={finalImage}
             alt="Final T-Shirt Design"
-            className="mx-auto border shadow-md"
+            className="mx-auto border shadow-md object-cover"
           />
           <a
             href={finalImage}
